@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.3
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 06, 2021 at 03:01 PM
--- Server version: 10.4.14-MariaDB
--- PHP Version: 7.4.11
+-- Generation Time: Jan 02, 2023 at 04:32 PM
+-- Server version: 10.4.24-MariaDB
+-- PHP Version: 8.1.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `cikwo_database`
+-- Database: `database_cikwo`
 --
 
 -- --------------------------------------------------------
@@ -39,7 +39,7 @@ CREATE TABLE `admin` (
 --
 
 INSERT INTO `admin` (`id_admin`, `username`, `password`, `nama_lengkap`) VALUES
-(1, 'andi', '827ccb0eea8a706c4c34a16891f84e7b', 'andi');
+(1, 'admin', '827ccb0eea8a706c4c34a16891f84e7b', 'admin');
 
 -- --------------------------------------------------------
 
@@ -75,7 +75,11 @@ CREATE TABLE `pelanggan` (
 
 INSERT INTO `pelanggan` (`id_pelanggan`, `email_pelanggan`, `password_pelanggan`, `nama_pelanggan`, `telepon_pelanggan`, `alamat_pelanggan`, `foto_profil`) VALUES
 (7, 'dendi@gmail.com', '15eef7c37a8d9c91355b3b4198be17b2', 'dendi', '08121212121', 'jauh sekali', ''),
-(8, 'dendipradana@gmail.com', '827ccb0eea8a706c4c34a16891f84e7b', 'dendi', '08121212121', 'jauh', '');
+(8, 'dendipradana@gmail.com', '827ccb0eea8a706c4c34a16891f84e7b', 'dendi', '08121212121', 'jauh', ''),
+(9, 'andiapriansah46@gmail.com', '03339dc0dff443f15c254baccde9bece', 'andi', '085158799719', 'wates', ''),
+(10, 'arsenhs99@gmail.com', '03339dc0dff443f15c254baccde9bece', 'andi', '088816171771', 'penataran', ''),
+(11, 'siswanto123@gmail.com', 'f8c6e75242df258467104a15f113f425', 'siswanto', '088816171771', 'penataran', ''),
+(12, 'dadang@gmail.com', 'f63f1ed278d0cb8f2ede661328779791', 'dadang', '085151885612', 'palembang', '');
 
 -- --------------------------------------------------------
 
@@ -98,7 +102,11 @@ CREATE TABLE `pembelian` (
 
 INSERT INTO `pembelian` (`id_pembelian`, `tanggal_pembelian`, `jumlah_pembelian`, `ongkir`, `total_pembelian`, `id_pelanggan`) VALUES
 (28, '2021-05-05', 15000, 1000, 16000, 7),
-(29, '2021-05-06', 15000, 1000, 16000, 8);
+(29, '2021-05-06', 15000, 1000, 16000, 8),
+(30, '2021-06-23', 15000, 1000, 16000, 9),
+(31, '2022-12-28', 5000, 1000, 6000, 12),
+(32, '2022-12-28', 5000, 1000, 6000, 12),
+(33, '2022-12-29', 35, 1000, 1035, 12);
 
 -- --------------------------------------------------------
 
@@ -119,7 +127,11 @@ CREATE TABLE `pembelian_produk` (
 
 INSERT INTO `pembelian_produk` (`id_pembelian_produk`, `jumlah`, `id_pembelian`, `id_produk`) VALUES
 (33, 1, 28, 1),
-(34, 1, 29, 1);
+(34, 1, 29, 1),
+(35, 1, 30, 1),
+(36, 1, 31, 1),
+(37, 1, 32, 1),
+(38, 1, 33, 13);
 
 -- --------------------------------------------------------
 
@@ -143,8 +155,11 @@ CREATE TABLE `produk` (
 --
 
 INSERT INTO `produk` (`id_produk`, `nama_produk`, `harga_produk`, `stok`, `foto_produk`, `deskripsi_produk`, `likes`, `id_warung`) VALUES
-(1, 'Nasi Goreng', 15000, 2, '7.jpg', 'Nasi Goreng enak dengan campuran telor, sosis, baso, ayam', 2, 1),
-(7, 'Kopi Jos', 6000, 0, '16.jpg', 'Terbuat dari kopi pilihan yaitu kopi kapal api', 1, 2);
+(1, 'biji kopi (1/5 kg 1 bungkus)', 25, 20, 'e93c769061f69030a5c04ebaf0afd36f.jpg', '															berat bersih perbungkus 1/5 kg									', 2, 1),
+(13, 'kopi bubuk (1/5 kg 1 bungkus)', 35, 19, 'kemasan-kopi-standing-pouch.webp', '							berat bersih perbungkus (1/5 kg bungkus)								', 0, 1),
+(17, 'buak tat sedang', 20, 20, 'f6bd474a1fc3d1a8114a2cc8cc965c0f.jpg', 'isi 1 ukuran sedang', 0, 1),
+(18, 'kue cucur', 15, 20, 'maxresdefault.jpg', 'isi bersih 1 paket setengah  (1/5kg)', 0, 1),
+(19, 'buak tat kecil', 15, 50, 'images.jpg', 'isi perpaket empat buah kue tat ', 0, 1);
 
 -- --------------------------------------------------------
 
@@ -164,9 +179,9 @@ CREATE TABLE `warung` (
 --
 
 INSERT INTO `warung` (`id_warung`, `nama_warung`, `alamat_warung`, `telepon_warung`) VALUES
-(1, 'Makanan', 'Berbagai Hidangan Khas Lampung Tersedia Untuk dinikmati', 'Pesan'),
-(2, 'Minuman', 'Tersedia Berbagai jenis Minuman Spesial Untuk anda', 'Pesan'),
-(3, 'Spesial Anjak Cikwo', 'Menu Paling di Cikwo Coffe Liwa', 'Pesan');
+(1, 'Oleh - oleh', 'Oleh - oleh khas lampung di Cikwo Coffe', '085158799719'),
+(2, 'Minuman', 'Menu belum tersedia saat ini', ''),
+(3, 'Makanan ', 'Menu belum tersedia saat ini', '');
 
 --
 -- Indexes for dumped tables
@@ -228,37 +243,37 @@ ALTER TABLE `warung`
 -- AUTO_INCREMENT for table `admin`
 --
 ALTER TABLE `admin`
-  MODIFY `id_admin` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_admin` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `likes`
 --
 ALTER TABLE `likes`
-  MODIFY `id_likes` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id_likes` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `pelanggan`
 --
 ALTER TABLE `pelanggan`
-  MODIFY `id_pelanggan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id_pelanggan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `pembelian`
 --
 ALTER TABLE `pembelian`
-  MODIFY `id_pembelian` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `id_pembelian` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT for table `pembelian_produk`
 --
 ALTER TABLE `pembelian_produk`
-  MODIFY `id_pembelian_produk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `id_pembelian_produk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 
 --
 -- AUTO_INCREMENT for table `produk`
 --
 ALTER TABLE `produk`
-  MODIFY `id_produk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id_produk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `warung`
