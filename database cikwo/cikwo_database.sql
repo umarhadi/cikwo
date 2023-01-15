@@ -93,21 +93,22 @@ CREATE TABLE `pembelian` (
   `jumlah_pembelian` int(11) NOT NULL,
   `ongkir` int(11) NOT NULL,
   `total_pembelian` int(11) DEFAULT NULL,
-  `id_pelanggan` int(11) DEFAULT NULL
+  `id_pelanggan` int(11) DEFAULT NULL,
+  `status` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `pembelian`
 --
 
-INSERT INTO `pembelian` (`id_pembelian`, `tanggal_pembelian`, `jumlah_pembelian`, `ongkir`, `total_pembelian`, `id_pelanggan`) VALUES
-(28, '2021-05-05', 15000, 1000, 16000, 7),
-(29, '2021-05-06', 15000, 1000, 16000, 8),
-(30, '2021-06-23', 15000, 1000, 16000, 9),
-(31, '2022-12-28', 5000, 1000, 6000, 12),
-(32, '2022-12-28', 5000, 1000, 6000, 12),
-(33, '2022-12-29', 35, 1000, 1035, 12),
-(34, '2023-01-15', 35, 1000, 1035, 12);
+INSERT INTO `pembelian` (`id_pembelian`, `tanggal_pembelian`, `jumlah_pembelian`, `ongkir`, `total_pembelian`, `id_pelanggan`, `status`) VALUES
+(28, '2021-05-05', 15000, 1000, 16000, 7, 'dibayar'),
+(29, '2021-05-06', 15000, 1000, 16000, 8, ''),
+(30, '2021-06-23', 15000, 1000, 16000, 9, ''),
+(31, '2022-12-28', 5000, 1000, 6000, 12, ''),
+(32, '2022-12-28', 5000, 1000, 6000, 12, ''),
+(33, '2022-12-29', 35, 1000, 1035, 12, ''),
+(34, '2023-01-15', 35, 1000, 1035, 12, '');
 
 -- --------------------------------------------------------
 
