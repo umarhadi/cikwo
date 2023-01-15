@@ -1,7 +1,6 @@
 <?php 
 session_start();
 include 'koneksi.php';
-include 'protect.php';
 $id_produk=$_GET['id'];
 $query=$conn->query("SELECT * FROM produk JOIN warung ON produk.id_warung=warung.id_warung WHERE id_produk='$id_produk'");
 $data=$query->fetch_assoc();
