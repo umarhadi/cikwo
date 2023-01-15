@@ -161,11 +161,17 @@ $id=$_GET['id'];
     <div id="all">
         <div id="content">
             <div class="container">
+            <?php 
+                                        $query2=$conn->query("SELECT * FROM pembelian WHERE id_pembelian=$_GET[id]");
+                                        $data2=$query2->fetch_assoc();
+                                    ?>
                 <a href="prosescetak.php?id=<?php echo $id;?>" class="btn btn-success pull-right" style="color: #fff; text-decoration: none; margin-right: 5px; margin-top: 10px;">Cetak Nota</a>
                     <a href="all-menu.php" class="btn btn-warning pull-right" style="color: #fff; text-decoration: none; margin-right: 15px; margin-top: 10px;">Belanja lagi</a>
+                    <a href="https://api.whatsapp.com/send?phone=6285158799719&text=Saya%20*<?php echo $_SESSION['login']['nama_pelanggan']; ?>*%20dengan%20ID%20Pesanan%20*%23<?php echo $_GET['id']; ?>*%20ingin%20melakukan%20pembayaran%20sebesar%20*Rp.%20<?php echo number_format($data2['total_pembelian']); ?>*.%0A%0AAlamat%3A%20<?php echo $_SESSION['login']['alamat_pelanggan']; ?>." class="btn btn-danger pull-right" style="color: #fff; text-decoration: none; margin-right: 15px; margin-top: 10px;">Konfirmasi</a>
                 <div class="col-md-13" style="margin-top: 5px;" id="nota">
                     <div class="box" id="contact">
                         <h1>Nota Pembelian #<?php echo $_GET['id']; ?></h1>
+                        <h3>Klik konfirmasi untuk menyelesaikan pembelian</h3>
                         <p class="lead">Berikut nota pembelian anda :</p>
                         <div class="table-responsive">
                             <table class="table table-bordered">
@@ -202,10 +208,6 @@ $id=$_GET['id'];
                                     } ?>
                                 </tbody>
                                 <tfoot>
-                                    <?php 
-                                        $query2=$conn->query("SELECT * FROM pembelian WHERE id_pembelian=$_GET[id]");
-                                        $data2=$query2->fetch_assoc();
-                                    ?>
                                     <tr>
                                         <th colspan="5" class="text-right">Total Pembelian</th>
                                         <th>Rp.<?php echo number_format($data2['jumlah_pembelian']); ?></th>

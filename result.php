@@ -167,7 +167,8 @@
                                         $total = $total+$subharga;
                                         $total_jumlah=count($_SESSION['keranjang']);
                                         $ongkir=1000*$total_jumlah;
-                                        $bayar=$total+$ongkir;                                        
+                                        $bayar=$total+$ongkir;
+                                        $status="Dipesan"                                   
                                     ?>
                                     <tr>
                                         <td>
@@ -217,7 +218,7 @@
                                 $id_pelanggan = $_SESSION['login']['id_pelanggan'];
                                 $tanggal_pembelian = date('Y-m-d');
                                 //Simpan data pembelian ke tabel pembelian
-                                $conn->query("INSERT INTO pembelian VALUES ('','$tanggal_pembelian','$total','$ongkir','$bayar','$id_pelanggan')");
+                                $conn->query("INSERT INTO pembelian VALUES ('','$tanggal_pembelian','$total','$ongkir','$bayar','$id_pelanggan', '$status')");
 
                                 //get id_pembelian barusan
                                 $id_pembelian_barusan = $conn->insert_id;

@@ -6,6 +6,7 @@
 		<thead>
 			<tr>
 				<th>No</th>
+				<th>ID</th>
 				<th>Nama Pelanggan</th>
 				<th>Tanggal</th>
 				<th>Status</th>
@@ -20,6 +21,7 @@
 			?>
 				<tr>
 					<td><?php echo $no++; ?></td>
+					<td><?php echo $data['id_pembelian'];?></td>
 					<td><?php echo $data['nama_pelanggan']; ?></td>
 					<td><?php echo $data['tanggal_pembelian']; ?></td>
 					<td><?php echo $data['status']; ?></td>
