@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 02, 2023 at 04:32 PM
+-- Generation Time: Jan 15, 2023 at 05:07 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -106,7 +106,8 @@ INSERT INTO `pembelian` (`id_pembelian`, `tanggal_pembelian`, `jumlah_pembelian`
 (30, '2021-06-23', 15000, 1000, 16000, 9),
 (31, '2022-12-28', 5000, 1000, 6000, 12),
 (32, '2022-12-28', 5000, 1000, 6000, 12),
-(33, '2022-12-29', 35, 1000, 1035, 12);
+(33, '2022-12-29', 35, 1000, 1035, 12),
+(34, '2023-01-15', 35, 1000, 1035, 12);
 
 -- --------------------------------------------------------
 
@@ -131,7 +132,8 @@ INSERT INTO `pembelian_produk` (`id_pembelian_produk`, `jumlah`, `id_pembelian`,
 (35, 1, 30, 1),
 (36, 1, 31, 1),
 (37, 1, 32, 1),
-(38, 1, 33, 13);
+(38, 1, 33, 13),
+(39, 1, 34, 13);
 
 -- --------------------------------------------------------
 
@@ -156,7 +158,7 @@ CREATE TABLE `produk` (
 
 INSERT INTO `produk` (`id_produk`, `nama_produk`, `harga_produk`, `stok`, `foto_produk`, `deskripsi_produk`, `likes`, `id_warung`) VALUES
 (1, 'biji kopi (1/5 kg 1 bungkus)', 25, 20, 'e93c769061f69030a5c04ebaf0afd36f.jpg', '															berat bersih perbungkus 1/5 kg									', 2, 1),
-(13, 'kopi bubuk (1/5 kg 1 bungkus)', 35, 19, 'kemasan-kopi-standing-pouch.webp', '							berat bersih perbungkus (1/5 kg bungkus)								', 0, 1),
+(13, 'kopi bubuk (1/5 kg 1 bungkus)', 35, 18, 'kemasan-kopi-standing-pouch.webp', '							berat bersih perbungkus (1/5 kg bungkus)								', 0, 1),
 (17, 'buak tat sedang', 20, 20, 'f6bd474a1fc3d1a8114a2cc8cc965c0f.jpg', 'isi 1 ukuran sedang', 0, 1),
 (18, 'kue cucur', 15, 20, 'maxresdefault.jpg', 'isi bersih 1 paket setengah  (1/5kg)', 0, 1),
 (19, 'buak tat kecil', 15, 50, 'images.jpg', 'isi perpaket empat buah kue tat ', 0, 1);
@@ -261,13 +263,13 @@ ALTER TABLE `pelanggan`
 -- AUTO_INCREMENT for table `pembelian`
 --
 ALTER TABLE `pembelian`
-  MODIFY `id_pembelian` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `id_pembelian` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT for table `pembelian_produk`
 --
 ALTER TABLE `pembelian_produk`
-  MODIFY `id_pembelian_produk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+  MODIFY `id_pembelian_produk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
 -- AUTO_INCREMENT for table `produk`
