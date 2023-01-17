@@ -1,4 +1,7 @@
-<?php include 'protect.php'; ?>
+<?php
+include 'protect.php';
+include '../des/encrypt.php';
+?>
 <h2>Data Pembelian</h2>
 
 <div class="table-responsive">
@@ -13,21 +16,47 @@
 			</tr>
 		</thead>
 		<tbody>
-			<?php $no=1; ?>
-			<?php $query=$conn->query("SELECT * FROM pembelian JOIN pelanggan ON pembelian.id_pelanggan=pelanggan.id_pelanggan") ?>
-			<?php while ($data=$query->fetch_assoc()) {
-				?>
+			<?php
+			$no = 1;
+			$query = $conn->query("SELECT * FROM pembelian JOIN pelanggan ON pembelian.id_pelanggan=pelanggan.id_pelanggan");
+
+			while ($data = $query->fetch_assoc()) {
+
+				$encrypt_result = [
+					'tanggal' => trim($data['tanggal_pembelian']),
+					'bayar' => trim($data['total_pembelian'])
+				];
+
+				$decrypt_result = array();
+
+				$desModule = new Encrypt();
+
+				foreach ($encrypt_result as $key => $value) {
+					$plaintext = "";
+					$ciphertext = "";
+
+					$arr_ciphertext = str_split($value, 64);
+
+					foreach ($arr_ciphertext as $i) {
+						$decrypt = $desModule->decrypt($i, '12345678');
+						$plaintext .= $desModule->read_bin($decrypt);
+						$ciphertext .= $desModule->read_bin($i);
+					}
+
+					$decrypt_result[$key] = $plaintext;
+				}
+			?>
 				<tr>
 					<td><?php echo $no++; ?></td>
 					<td><?php echo $data['nama_pelanggan']; ?></td>
-					<td><?php echo $data['tanggal_pembelian']; ?></td>
-					<td>Rp.<?php echo number_format($data['total_pembelian']); ?></td>
+					<td><?php echo $decrypt_result['tanggal']; ?></td>
+					<td>Rp.<?php echo number_format(intval($decrypt_result['bayar'])); ?></td>
 					<td>
 						<a href="index.php?halaman=detail&id=<?php echo $data['id_pembelian']; ?>" class="btn btn-info">Detail</a>
 					</td>
 				</tr>
-				<?php
+			<?php
 			} ?>
 		</tbody>
-	</table>	
+	</table>
 </div>
