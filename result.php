@@ -1,10 +1,11 @@
 <?php
-    session_start();  
-    include 'protect.php';
-    include 'koneksi.php';
-    if (!$_SESSION['keranjang']) {
-        header("location: cart.php");
-    }
+session_start();
+include 'protect.php';
+include 'koneksi.php';
+include 'des/encrypt.php';
+if (!$_SESSION['keranjang']) {
+    header("location: cart.php");
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -47,27 +48,27 @@
 <body>
     <!-- *** TOPBAR ***
  _________________________________________________________ -->
- <div id="top">
-    <div class="container">
-        <div class="col-md-6" data-animate="fadeInDown">
-            <ul class="menu">
-                <li><a href="profile.php">Selamat datang, <?php echo $_SESSION['login']['nama_pelanggan']; ?></a>
-                </li>
-                <li><a href="logout.php">Logout</a>
-                </li>
-            </ul>
+    <div id="top">
+        <div class="container">
+            <div class="col-md-6" data-animate="fadeInDown">
+                <ul class="menu">
+                    <li><a href="profile.php">Selamat datang, <?php echo $_SESSION['login']['nama_pelanggan']; ?></a>
+                    </li>
+                    <li><a href="logout.php">Logout</a>
+                    </li>
+                </ul>
+            </div>
         </div>
     </div>
-</div>
 
     <!-- *** TOP BAR END *** -->
 
     <!-- *** NAVBAR ***
  _________________________________________________________ -->
 
- <div class="navbar navbar-default yamm" role="navigation" id="navbar">
-    <div class="container">
-        <div class="navbar-header">
+    <div class="navbar navbar-default yamm" role="navigation" id="navbar">
+        <div class="container">
+            <div class="navbar-header">
 
                 <a class="navbar-brand home" href="index.php" data-animate-hover="bounce">
                     <img src="logo.png" class="hidden-xs">
@@ -79,7 +80,7 @@
                         <i class="fa fa-align-justify"></i>
                     </button>
                     <a class="btn btn-default navbar-toggle" href="cart.php">
-                        <i class="fa fa-shopping-cart"></i>  <span class="hidden-xs">Keranjang Belanja</span>
+                        <i class="fa fa-shopping-cart"></i> <span class="hidden-xs">Keranjang Belanja</span>
                     </a>
                 </div>
             </div>
@@ -103,22 +104,21 @@
 
             <div class="navbar-buttons">
                 <?php
-                error_reporting(0);                     
-                    if (!$_SESSION['keranjang']) {
-                    ?>
-                        <div class="navbar-collapse collapse right" id="basket-overview">
-                            <a href="cart.php" class="btn btn-primary navbar-btn"><i class="fa fa-shopping-cart"></i><span class="hidden-sm">Keranjang Belanja</span></a>
-                        </div>
-                    <?php        
-                    }
-                    else{
+                error_reporting(0);
+                if (!$_SESSION['keranjang']) {
+                ?>
+                    <div class="navbar-collapse collapse right" id="basket-overview">
+                        <a href="cart.php" class="btn btn-primary navbar-btn"><i class="fa fa-shopping-cart"></i><span class="hidden-sm">Keranjang Belanja</span></a>
+                    </div>
+                <?php
+                } else {
                     $item = count($_SESSION['keranjang']);
-                    ?>
-                        <div class="navbar-collapse collapse right" id="basket-overview">
-                            <a href="cart.php" class="btn btn-primary navbar-btn"><i class="fa fa-shopping-cart"></i><span class="hidden-sm">Keranjang Belanja (<?php echo $item;?>)</span></a>
-                        </div>
-                    <?php
-                    }
+                ?>
+                    <div class="navbar-collapse collapse right" id="basket-overview">
+                        <a href="cart.php" class="btn btn-primary navbar-btn"><i class="fa fa-shopping-cart"></i><span class="hidden-sm">Keranjang Belanja (<?php echo $item; ?>)</span></a>
+                    </div>
+                <?php
+                }
                 ?>
             </div>
 
@@ -141,7 +141,7 @@
                     <div class="box">
                         <h1>Detail Pembelian : </h1>
 
-                        <p class="lead">Berikut rincian pembelian anda  </p>
+                        <p class="lead">Berikut rincian pembelian anda </p>
 
                         <div class="table-responsive">
                             <table class="table">
@@ -155,32 +155,32 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php 
-                                        $total = 0; 
+                                    <?php
+                                    $total = 0;
                                     ?>
-                                   <?php foreach ($_SESSION["keranjang"] as $id_produk => $jumlah): ?>
-                                    <?php 
+                                    <?php foreach ($_SESSION["keranjang"] as $id_produk => $jumlah) : ?>
+                                        <?php
                                         $query = $conn->query("SELECT * FROM produk 
                                             WHERE id_produk='$id_produk'");
-                                        $data=$query->fetch_assoc();
-                                        $subharga=$data['harga_produk']*$jumlah;
-                                        $total = $total+$subharga;
-                                        $total_jumlah=count($_SESSION['keranjang']);
-                                        $ongkir=1000*$total_jumlah;
-                                        $bayar=$total+$ongkir;                                        
-                                    ?>
-                                    <tr>
-                                        <td>
-                                            <a href="detail_produk.php?id=<?php echo $data['id_produk']; ?>">
-                                                <img src="foto_produk/<?php echo $data['foto_produk'];?>" alt="">
-                                            </a>
-                                        </td>
-                                        <td><a href="foto_produk/<?php echo $data['foto_produk'];?>"><?php echo $data['nama_produk']; ?></a></td>
-                                        
-                                        <td><?php echo $jumlah;?></td>
-                                        <td>Rp.<?php echo number_format($data['harga_produk']); ?></td>
-                                        <td>Rp.<?php echo number_format($subharga); ?></td>
-                                    </tr>
+                                        $data = $query->fetch_assoc();
+                                        $subharga = $data['harga_produk'] * $jumlah;
+                                        $total = $total + $subharga;
+                                        $total_jumlah = count($_SESSION['keranjang']);
+                                        $ongkir = 1000 * $total_jumlah;
+                                        $bayar = $total + $ongkir;
+                                        ?>
+                                        <tr>
+                                            <td>
+                                                <a href="detail_produk.php?id=<?php echo $data['id_produk']; ?>">
+                                                    <img src="foto_produk/<?php echo $data['foto_produk']; ?>" alt="">
+                                                </a>
+                                            </td>
+                                            <td><a href="foto_produk/<?php echo $data['foto_produk']; ?>"><?php echo $data['nama_produk']; ?></a></td>
+
+                                            <td><?php echo $jumlah; ?></td>
+                                            <td>Rp.<?php echo number_format($data['harga_produk']); ?></td>
+                                            <td>Rp.<?php echo number_format($subharga); ?></td>
+                                        </tr>
                                     <?php endforeach ?>
                                 </tbody>
                                 <tfoot>
@@ -212,29 +212,69 @@
                                 </div>
                             </div>
                         </form>
-                        <?php 
-                            if (isset($_POST['submit'])) {
-                                $id_pelanggan = $_SESSION['login']['id_pelanggan'];
-                                $tanggal_pembelian = date('Y-m-d');
-                                //Simpan data pembelian ke tabel pembelian
-                                $conn->query("INSERT INTO pembelian VALUES ('','$tanggal_pembelian','$total','$ongkir','$bayar','$id_pelanggan')");
+                        <?php
+                        if (isset($_POST['submit'])) {
+                            $id_pelanggan = $_SESSION['login']['id_pelanggan'];
+                            $tanggal_pembelian = date('Y-m-d');
 
-                                //get id_pembelian barusan
-                                $id_pembelian_barusan = $conn->insert_id;
-                                $stok=$data['stok'];
+                            $data = [
+                                'tanggal' => strval(trim($tanggal_pembelian)),
+                                'total' => strval(trim($total)),
+                                'ongkir' => strval(trim($ongkir)),
+                                'bayar' => strval(trim($bayar))
+                            ];
 
-                                foreach ($_SESSION['keranjang'] as $id_produk => $jumlah) {
-                                    $stok_update = $stok-$jumlah;
-                                    $conn->query("INSERT INTO pembelian_produk VALUES ('','$jumlah','$id_pembelian_barusan','$id_produk')");
-                                    $conn->query("UPDATE produk SET stok='$stok_update' WHERE id_produk=$id_produk");
+                            $encrypt_result = array();
+
+                            $desModule = new Encrypt();
+
+                            $tampil_proses = array(array());
+
+                            foreach ($data as $key => $value) {
+                                $bin_ciphertext = "";
+                                $ciphertext = "";
+
+                                $arr_plaintext = str_split($value, 8);
+
+                                $proses = 0;
+
+                                foreach ($arr_plaintext as $i) {
+                                    $tampil_proses[$key][$proses] = "";
+                                    $tampil_proses[$key][$proses] .= "Proses ke " . ($proses + 1) . " <br>";
+                                    // Angka 12345678 adalah key untuk enkripsi, key harus 8 digit
+                                    $encrypt = $desModule->encrypt($i, '12345678', true);
+                                    $bin_ciphertext .= $encrypt;
+                                    $ciphertext .= $desModule->read_bin($encrypt);
+                                    $tampil_proses[$key][$proses] .= $desModule->proses_encrypt;
+                                    $proses++;
                                 }
 
-                                unset($_SESSION['keranjang']);
-
-                                echo "<script>alert('Pembelian Sukses')</script>";
-                                echo "<script>location='nota.php?id=$id_pembelian_barusan'</script>";
-
+                                $encrypt_result[$key] = $bin_ciphertext;
                             }
+
+                            $tanggal_pembelian = $encrypt_result['tanggal'];
+                            $total = $encrypt_result['total'];
+                            $ongkir = $encrypt_result['ongkir'];
+                            $bayar = $encrypt_result['bayar'];
+
+                            // Simpan data pembelian ke tabel pembelian
+                            $conn->query("INSERT INTO pembelian VALUES ('','$tanggal_pembelian','$total','$ongkir','$bayar','$id_pelanggan')");
+
+                            //get id_pembelian barusan
+                            $id_pembelian_barusan = $conn->insert_id;
+                            $stok = $data['stok'];
+
+                            foreach ($_SESSION['keranjang'] as $id_produk => $jumlah) {
+                                $stok_update = $stok - $jumlah;
+                                $conn->query("INSERT INTO pembelian_produk VALUES ('','$jumlah','$id_pembelian_barusan','$id_produk')");
+                                $conn->query("UPDATE produk SET stok='$stok_update' WHERE id_produk=$id_produk");
+                            }
+
+                            unset($_SESSION['keranjang']);
+
+                            echo "<script>alert('Pembelian Sukses')</script>";
+                            echo "<script>location='nota.php?id=$id_pembelian_barusan'</script>";
+                        }
                         ?>
                     </div>
                 </div>
@@ -246,37 +286,37 @@
 
         <!-- *** COPYRIGHT ***
  _________________________________________________________ -->
- <div id="copyright">
-    <div class="container">
-        <div class="col-md-6">
-            <p class="pull-left">© E-DEL 2018</p>
+        <div id="copyright">
+            <div class="container">
+                <div class="col-md-6">
+                    <p class="pull-left">© E-DEL 2018</p>
+                </div>
+                <div class="col-md-6">
+                    <p class="pull-right">Alright Reserved by 11Fingers
+                    </p>
+                </div>
+            </div>
         </div>
-        <div class="col-md-6">
-            <p class="pull-right">Alright Reserved by 11Fingers
-            </p>
-        </div>
+        <!-- *** COPYRIGHT END *** -->
+
+
+
     </div>
-</div>
-<!-- *** COPYRIGHT END *** -->
+    <!-- /#all -->
 
 
 
-</div>
-<!-- /#all -->
-
-
-    
 
     <!-- *** SCRIPTS TO INCLUDE ***
  _________________________________________________________ -->
- <script src="asset/js/jquery-1.11.0.min.js"></script>
- <script src="asset/js/bootstrap.min.js"></script>
- <script src="asset/js/jquery.cookie.js"></script>
- <script src="asset/js/waypoints.min.js"></script>
- <script src="asset/js/modernizr.js"></script>
- <script src="asset/js/bootstrap-hover-dropdown.js"></script>
- <script src="asset/js/owl.carousel.min.js"></script>
- <script src="asset/js/front.js"></script>
+    <script src="asset/js/jquery-1.11.0.min.js"></script>
+    <script src="asset/js/bootstrap.min.js"></script>
+    <script src="asset/js/jquery.cookie.js"></script>
+    <script src="asset/js/waypoints.min.js"></script>
+    <script src="asset/js/modernizr.js"></script>
+    <script src="asset/js/bootstrap-hover-dropdown.js"></script>
+    <script src="asset/js/owl.carousel.min.js"></script>
+    <script src="asset/js/front.js"></script>
 
 
 
