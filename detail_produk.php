@@ -286,10 +286,10 @@ if (isset($_POST['unliked'])) {
          <div id="copyright">
             <div class="container">
                 <div class="col-md-6">
-                    <p class="pull-left">© CIkwo Cofee 2021</p>
+                    <p class="pull-left">© CIkwo Cofee 2023</p>
                 </div>
                 <div class="col-md-6">
-                    <p class="pull-right">&copy; 2022, Andi Apriansah
+                    <p class="pull-right">&copy; 2023, Andi Apriansah
                     </p>
                 </div>
             </div>
