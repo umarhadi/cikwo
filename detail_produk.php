@@ -4,7 +4,7 @@ include 'koneksi.php';
 $id_produk=$_GET['id'];
 $query=$conn->query("SELECT * FROM produk JOIN warung ON produk.id_warung=warung.id_warung WHERE id_produk='$id_produk'");
 $data=$query->fetch_assoc();
-$id_pelanggan=$_SESSION['login']['id_pelanggan'];
+//$id_pelanggan=$_SESSION['login']['id_pelanggan'];
 error_reporting(0);
 
 if (isset($_POST['liked'])) {

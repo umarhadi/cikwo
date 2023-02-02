@@ -1,7 +1,7 @@
 <?php
     session_start(); 
     include 'koneksi.php';
-    include 'protect.php';
+    error_reporting(0);
 ?>
 <!DOCTYPE html>
 <html lang="en">
