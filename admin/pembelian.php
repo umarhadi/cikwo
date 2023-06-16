@@ -27,7 +27,7 @@ include '../des/encrypt.php';
 					'bayar' => trim($data['total_pembelian'])
 				];
 
-				$decrypt_result = array();
+				$decrypt_result = [];
 
 				$desModule = new Encrypt();
 
@@ -49,14 +49,15 @@ include '../des/encrypt.php';
 				<tr>
 					<td><?php echo $no++; ?></td>
 					<td><?php echo $data['nama_pelanggan']; ?></td>
-					<td><?php echo $decrypt_result['tanggal']; ?></td>
+					<td><?php echo htmlspecialchars_decode($decrypt_result['tanggal']); ?></td>
 					<td>Rp.<?php echo number_format(intval($decrypt_result['bayar'])); ?></td>
 					<td>
 						<a href="index.php?halaman=detail&id=<?php echo $data['id_pembelian']; ?>" class="btn btn-info">Detail</a>
 					</td>
 				</tr>
 			<?php
-			} ?>
+			}
+			?>
 		</tbody>
 	</table>
 </div>

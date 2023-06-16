@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `database_cikwo`
+-- Database: `cikwo`
 --
 
 -- --------------------------------------------------------
@@ -52,61 +52,6 @@ CREATE TABLE `likes` (
   `id_pelanggan` int(11) NOT NULL,
   `id_produk` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `pelanggan`
---
-
-CREATE TABLE `pelanggan` (
-  `id_pelanggan` int(11) NOT NULL,
-  `email_pelanggan` varchar(100) DEFAULT NULL,
-  `password_pelanggan` varchar(50) DEFAULT NULL,
-  `nama_pelanggan` varchar(100) DEFAULT NULL,
-  `telepon_pelanggan` varchar(15) DEFAULT NULL,
-  `alamat_pelanggan` varchar(100) NOT NULL,
-  `foto_profil` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `pelanggan`
---
-
-INSERT INTO `pelanggan` (`id_pelanggan`, `email_pelanggan`, `password_pelanggan`, `nama_pelanggan`, `telepon_pelanggan`, `alamat_pelanggan`, `foto_profil`) VALUES
-(7, 'dendi@gmail.com', '15eef7c37a8d9c91355b3b4198be17b2', 'dendi', '08121212121', 'jauh sekali', ''),
-(8, 'dendipradana@gmail.com', '827ccb0eea8a706c4c34a16891f84e7b', 'dendi', '08121212121', 'jauh', ''),
-(9, 'andiapriansah46@gmail.com', '03339dc0dff443f15c254baccde9bece', 'andi', '085158799719', 'wates', ''),
-(10, 'arsenhs99@gmail.com', '03339dc0dff443f15c254baccde9bece', 'andi', '088816171771', 'penataran', ''),
-(11, 'siswanto123@gmail.com', 'f8c6e75242df258467104a15f113f425', 'siswanto', '088816171771', 'penataran', ''),
-(12, 'dadang@gmail.com', 'f63f1ed278d0cb8f2ede661328779791', 'dadang', '085151885612', 'palembang', '');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `pembelian`
---
-
-CREATE TABLE `pembelian` (
-  `id_pembelian` int(11) NOT NULL,
-  `tanggal_pembelian` date DEFAULT NULL,
-  `jumlah_pembelian` int(11) NOT NULL,
-  `ongkir` int(11) NOT NULL,
-  `total_pembelian` int(11) DEFAULT NULL,
-  `id_pelanggan` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `pembelian`
---
-
-INSERT INTO `pembelian` (`id_pembelian`, `tanggal_pembelian`, `jumlah_pembelian`, `ongkir`, `total_pembelian`, `id_pelanggan`) VALUES
-(28, '2021-05-05', 15000, 1000, 16000, 7),
-(29, '2021-05-06', 15000, 1000, 16000, 8),
-(30, '2021-06-23', 15000, 1000, 16000, 9),
-(31, '2022-12-28', 5000, 1000, 6000, 12),
-(32, '2022-12-28', 5000, 1000, 6000, 12),
-(33, '2022-12-29', 35, 1000, 1035, 12);
 
 -- --------------------------------------------------------
 
@@ -202,19 +147,6 @@ ALTER TABLE `likes`
   ADD KEY `id_produk` (`id_produk`);
 
 --
--- Indexes for table `pelanggan`
---
-ALTER TABLE `pelanggan`
-  ADD PRIMARY KEY (`id_pelanggan`);
-
---
--- Indexes for table `pembelian`
---
-ALTER TABLE `pembelian`
-  ADD PRIMARY KEY (`id_pembelian`),
-  ADD KEY `id_pelanggan` (`id_pelanggan`);
-
---
 -- Indexes for table `pembelian_produk`
 --
 ALTER TABLE `pembelian_produk`
@@ -252,18 +184,6 @@ ALTER TABLE `likes`
   MODIFY `id_likes` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `pelanggan`
---
-ALTER TABLE `pelanggan`
-  MODIFY `id_pelanggan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
-
---
--- AUTO_INCREMENT for table `pembelian`
---
-ALTER TABLE `pembelian`
-  MODIFY `id_pembelian` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
-
---
 -- AUTO_INCREMENT for table `pembelian_produk`
 --
 ALTER TABLE `pembelian_produk`
@@ -291,12 +211,6 @@ ALTER TABLE `warung`
 ALTER TABLE `likes`
   ADD CONSTRAINT `likes_ibfk_1` FOREIGN KEY (`id_pelanggan`) REFERENCES `pelanggan` (`id_pelanggan`),
   ADD CONSTRAINT `likes_ibfk_2` FOREIGN KEY (`id_produk`) REFERENCES `produk` (`id_produk`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `pembelian`
---
-ALTER TABLE `pembelian`
-  ADD CONSTRAINT `pembelian_ibfk_1` FOREIGN KEY (`id_pelanggan`) REFERENCES `pelanggan` (`id_pelanggan`);
 
 --
 -- Constraints for table `pembelian_produk`

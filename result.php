@@ -159,7 +159,9 @@ if (!$_SESSION['keranjang']) {
                                     $total = 0;
                                     ?>
                                     <?php foreach ($_SESSION["keranjang"] as $id_produk => $jumlah) : ?>
+
                                         <?php
+
                                         $query = $conn->query("SELECT * FROM produk 
                                             WHERE id_produk='$id_produk'");
                                         $data = $query->fetch_assoc();
@@ -230,7 +232,9 @@ if (!$_SESSION['keranjang']) {
 
                             $tampil_proses = array(array());
 
+
                             foreach ($data as $key => $value) {
+
                                 $bin_ciphertext = "";
                                 $ciphertext = "";
 
@@ -251,22 +255,34 @@ if (!$_SESSION['keranjang']) {
 
                                 $encrypt_result[$key] = $bin_ciphertext;
                             }
+                            // echo ('<pre>');
+                            // print_r($tampil_proses);
+                            // echo ('</pre>');
+                            // die();
 
                             $tanggal_pembelian = $encrypt_result['tanggal'];
                             $total = $encrypt_result['total'];
                             $ongkir = $encrypt_result['ongkir'];
                             $bayar = $encrypt_result['bayar'];
 
+
                             // Simpan data pembelian ke tabel pembelian
-                            $conn->query("INSERT INTO pembelian VALUES ('','$tanggal_pembelian','$total','$ongkir','$bayar','$id_pelanggan')");
+                            try {
+                                $pembelian = $conn->query("INSERT INTO pembelian VALUES (null,'$tanggal_pembelian','$total','$ongkir','$bayar','$id_pelanggan')");
+                            } catch (Exception $e) {
+                                echo ($e);
+                            }
 
                             //get id_pembelian barusan
                             $id_pembelian_barusan = $conn->insert_id;
-                            $stok = $data['stok'];
 
                             foreach ($_SESSION['keranjang'] as $id_produk => $jumlah) {
-                                $stok_update = $stok - $jumlah;
-                                $conn->query("INSERT INTO pembelian_produk VALUES ('','$jumlah','$id_pembelian_barusan','$id_produk')");
+                                $query = $conn->query("SELECT * FROM produk 
+                                            WHERE id_produk='$id_produk'");
+                                $produk = $query->fetch_assoc();
+                                $stok_update = $produk['stok'] - $jumlah;
+
+                                $conn->query("INSERT INTO pembelian_produk VALUES (null,'$jumlah','$id_pembelian_barusan','$id_produk')");
                                 $conn->query("UPDATE produk SET stok='$stok_update' WHERE id_produk=$id_produk");
                             }
 

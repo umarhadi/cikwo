@@ -1,3 +1,3 @@
 <?php 
-	$conn= new mysqli('localhost','root','','database_cikwo');
+$conn= new mysqli('localhost:8889','root','root','cikwo');
 ?>
