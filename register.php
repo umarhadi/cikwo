@@ -46,7 +46,7 @@
 					</div>
 
 					<div class="wrap-input100 validate-input" data-validate = "Valid email is: a@b.c">
-						<input class="input100" type="text" name="email">
+						<input class="input100" type="email" name="email">
 						<span class="focus-input100" data-placeholder="Insert Your Email"></span>
 					</div>
 
@@ -59,7 +59,7 @@
 					</div>
 
 					<div class="wrap-input100 validate-input" data-validate="Enter Phone Number">
-						<input class="input100" type="tel" name="phone">
+						<input class="input100" type="number" name="phone">
 						<span class="focus-input100" data-placeholder="Insert Your Phone Number"></span>
 					</div>
 

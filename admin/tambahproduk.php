@@ -4,7 +4,7 @@
 <form method="post" enctype="multipart/form-data">
 	<div class="form-group">
 		<label>ID Warung (<i>**Buka tab Warung untuk melihat ID Warung</i>)</label>
-		<input type="text" class="form-control" name="idwarung">
+		<input type="number" class="form-control" name="idwarung">
 	</div>
 	<div class="form-group">
 		<label>Nama Produk</label>

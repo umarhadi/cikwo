@@ -196,7 +196,7 @@ include 'koneksi.php';
                                                     </div>
                                                     <div class="form-group">
                                                         <label>No Telepon</label>
-                                                        <input type="tel" class="form-control" name="telepon" value="<?php echo $data['telepon_pelanggan']; ?>">
+                                                        <input type="number" class="form-control" name="telepon" value="<?php echo $data['telepon_pelanggan']; ?>">
                                                     </div>
                                                     <div class="form-group">
                                                         <label>Alamat</label>
