@@ -100,6 +100,9 @@
                     elseif($_GET['halaman']=="logout"){
                         include 'logout.php';
                     }
+                    elseif($_GET['halaman']=="status"){
+                        include 'ubahstatus.php';
+                    }
                 }   
                 else{
                     include 'home.php';

@@ -11,6 +11,7 @@ include '../des/encrypt.php';
 				<th>No</th>
 				<th>Nama Pelanggan</th>
 				<th>Tanggal</th>
+				<th>Status</th>
 				<th>Total</th>
 				<th>Aksi</th>
 			</tr>
@@ -50,9 +51,11 @@ include '../des/encrypt.php';
 					<td><?php echo $no++; ?></td>
 					<td><?php echo $data['nama_pelanggan']; ?></td>
 					<td><?php echo htmlspecialchars_decode($decrypt_result['tanggal']); ?></td>
+					<td><?php echo $data['status']; ?></td>
 					<td>Rp.<?php echo number_format(intval($decrypt_result['bayar'])); ?></td>
 					<td>
 						<a href="index.php?halaman=detail&id=<?php echo $data['id_pembelian']; ?>" class="btn btn-info">Detail</a>
+						<a href="index.php?halaman=status&id=<?php echo $data['id_pembelian']; ?>" class="btn btn-warning">Ubah Status</a>
 					</td>
 				</tr>
 			<?php
