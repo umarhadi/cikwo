@@ -126,75 +126,65 @@
 
     <div id="content">
 
-        <div class="container">
-            <div class="col-md-12">
-                <div id="main-slider">
-                    <?php 
-                    $q_slider=$conn->query("SELECT * FROM produk ORDER BY RAND() LIMIT 5");
-                    while ($slider=$q_slider->fetch_assoc()) {
-                        ?>
-                        <div class="item">
-                            <img src="foto_produk/<?php echo $slider['foto_produk']; ?>" style="height:553px;width:1200px;" class="img-responsive">
-                        </div>
-                        <?php
-                    }
-                    ?>  
-                </div>
-                <!-- /#main-slider -->
-            </div>
-        </div>
-		
-<!-- *** HOT PRODUCT SLIDESHOW ***
-_________________________________________________________ -->
-<div id="hot">
-
-    <div class="box">
-        <div class="container">
-            <div class="col-md-12">
-                <h1>Menu Favorit</h1>
-            </div>
-        </div>
-    </div>
-
     <div class="container">
-        <div class="product-slider">
-            <?php  
-            $query=$conn->query("SELECT*FROM produk ORDER BY likes DESC");
-            while ($data=$query->fetch_assoc()) {
-                ?>
-                <div class="item">
-                    <div class="product">
-                        <div class="flip-container">
-                            <div class="flipper">
-                                <div class="front">
-                                    <a href="detail_produk.php?id=<?php echo $data['id_produk']; ?>">
-                                        <img src="foto_produk/<?php echo $data['foto_produk'];?>" alt="" class="img-responsive">
-                                    </a>
-                                </div>
-                                <div class="back">
-                                    <a href="detail_produk.php?id=<?php echo $data['id_produk']; ?>">
-                                        <img src="foto_produk/<?php echo $data['foto_produk'];?>" alt="" class="img-responsive">
-                                    </a>
+    <div class="row">
+        <div class="col-md-6">
+            <div id="main-slider">
+                <?php 
+                $q_slider=$conn->query("SELECT * FROM produk ORDER BY RAND() LIMIT 5");
+                while ($slider=$q_slider->fetch_assoc()) {
+                    ?>
+                    <div class="item">
+                        <img src="foto_produk/<?php echo $slider['foto_produk']; ?>" class="img-fluid" style="height: 400px; width: 600px;">
+                    </div>
+                    <?php
+                }
+                ?>  
+            </div>
+            <!-- /#main-slider -->
+        </div>
+        <div class="col-md-6">
+            <div class="product-slider">
+                <?php  
+                $query=$conn->query("SELECT * FROM produk ORDER BY likes DESC");
+                while ($data=$query->fetch_assoc()) {
+                    ?>
+                    <div class="item">
+                        <div class="product">
+                            <div class="flip-container">
+                                <div class="flipper">
+                                    <div class="front">
+                                        <a href="detail_produk.php?id=<?php echo $data['id_produk']; ?>">
+                                            <img src="foto_produk/<?php echo $data['foto_produk'];?>" alt="" class="img-responsive" style="height: 100px; width: 100px;">
+                                        </a>
+                                    </div>
+                                    <div class="back">
+                                        <a href="detail_produk.php?id=<?php echo $data['id_produk']; ?>">
+                                            <img src="foto_produk/<?php echo $data['foto_produk'];?>" alt="" class="img-responsive" style="height: 100px; width: 100px;">
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
+                            <a href="detail_produk.php?id=<?php echo $data['id_produk']; ?>" class="invisible">
+                                <img src="foto_produk/<?php echo $data['foto_produk'];?>" alt="" class="img-responsive" style="height: 100px; width: 100px;">
+                            </a>
+                            <div class="text">
+                                <h3><a href="detail_produk.php?id=<?php echo $data['id_produk']; ?>"><?php echo $data['nama_produk']; ?></a></h3>
+                                <p class="price">Rp.<?php echo number_format($data['harga_produk']); ?></p>
+                            </div>
+                            <!-- /.text -->
                         </div>
-                        <a href="detail_produk.php?id=<?php echo $data['id_produk']; ?>" class="invisible">
-                            <img src="foto_produk/<?php echo $data['foto_produk'];?>" alt="" class="img-responsive">
-                        </a>
-                        <div class="text">
-                            <h3><a href="detail_produk.php?id=<?php echo $data['id_produk']; ?>"><?php echo $data['nama_produk']; ?></a></h3>
-                            <p class="price">Rp.<?php echo number_format($data['harga_produk']); ?></p>
-                        </div>
-                        <!-- /.text -->
+                        <!-- /.product -->
                     </div>
-                    <!-- /.product -->
-                </div>
-                <?php
-            }
-            ?>
+                    <?php
+                }
+                ?>
+            </div>
+            <!-- /.product-slider -->
         </div>
-        <!-- /.product-slider -->
     </div>
+</div>
+
     <!-- /.container -->
 
 </div>

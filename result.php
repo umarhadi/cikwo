@@ -265,10 +265,9 @@ if (!$_SESSION['keranjang']) {
                             $ongkir = $encrypt_result['ongkir'];
                             $bayar = $encrypt_result['bayar'];
 
-
                             // Simpan data pembelian ke tabel pembelian
                             try {
-                                $pembelian = $conn->query("INSERT INTO pembelian VALUES (null,'$tanggal_pembelian','$total','$ongkir','$bayar','$id_pelanggan')");
+                                $pembelian = $conn->query("INSERT INTO pembelian VALUES (null,'$tanggal_pembelian','$total','$ongkir','$bayar','$id_pelanggan', 'belum bayar')");
                             } catch (Exception $e) {
                                 echo ($e);
                             }
@@ -305,10 +304,10 @@ if (!$_SESSION['keranjang']) {
         <div id="copyright">
             <div class="container">
                 <div class="col-md-6">
-                    <p class="pull-left">© E-DEL 2018</p>
+                    <p class="pull-left">© Cikwo 2023</p>
                 </div>
                 <div class="col-md-6">
-                    <p class="pull-right">Alright Reserved by 11Fingers
+                    <p class="pull-right">Andi Apriansah
                     </p>
                 </div>
             </div>

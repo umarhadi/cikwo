@@ -1,3 +1,3 @@
 <?php 
-$conn= new mysqli('mysql.wkwkwk.fun','root','bebekbalap','cikwo');
+$conn= new mysqli('localhost','root','','cikwo');
 ?>
