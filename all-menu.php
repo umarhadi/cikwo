@@ -209,18 +209,18 @@
                                         <div class="flipper">
                                             <div class="front">
                                                 <a href="detail_produk.php?id=<?php echo $data['id_produk']; ?>">
-                                                    <img src="foto_produk/<?php echo $data['foto_produk'];?>" alt="" class="img-responsive">
+                                                    <img src="foto_produk/<?php echo $data['foto_produk'];?>" alt="" class="img-responsive" style="height: 253px; width: 253px;">
                                                 </a>
                                             </div>
                                             <div class="back">
                                                 <a href="detail_produk.php?id=<?php echo $data['id_produk']; ?>">
-                                                    <img src="foto_produk/<?php echo $data['foto_produk'];?>" alt="" class="img-responsive">
+                                                    <img src="foto_produk/<?php echo $data['foto_produk'];?>" alt="" class="img-responsive" style="height: 253px; width: 253px;">
                                                 </a>
                                             </div>
                                         </div>
                                     </div>
                                     <a href="detail_produk.php?id=<?php echo $data['id_produk']; ?>" class="invisible">
-                                        <img src="foto_produk/<?php echo $data['foto_produk'];?>" alt="" class="img-responsive">
+                                        <img src="foto_produk/<?php echo $data['foto_produk'];?>" alt="" class="img-responsive" style="height: 253px; width: 253px;">
                                     </a>
                                     <div class="text">
                                         <h3><a href="detail_produk.php?id=<?php echo $data['id_produk']; ?>"><?php echo $data['nama_produk']; ?></a></h3>
