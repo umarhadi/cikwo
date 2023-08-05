@@ -1,5 +1,5 @@
 # base image
-FROM php:7.4-apache
+FROM php:5.6-apache
 
 RUN apt-get update && \
     apt-get install -y libonig-dev libicu-dev icu-devtools unzip git
